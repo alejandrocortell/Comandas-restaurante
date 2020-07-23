@@ -1,7 +1,12 @@
 <template>
   <q-page class="flex flex-center">
-    Mesa {{ id }}
-    {{ mesa.lineasPedido }}
+    <div
+      v-for="(producto, index) in rest.productos"
+      :key="index"
+    >
+      <p>{{ producto }}</p>
+      <div @click="addProducto(producto)">Añadir producto</div>
+    </div>
     <q-footer
       elevated
       class="bg-grey-8 text-white"
@@ -12,8 +17,8 @@
           label="Index"
         />
         <q-route-tab
-          :to="{ name: 'addProducto', params: {id: id } }"
-          label="Añadir producto"
+          :to="{ name: 'mesa', params: { id: id.toString() } }"
+          label="Volver a mesa"
         />
       </q-tabs>
     </q-footer>
@@ -30,7 +35,7 @@ import Producto from "../class/Producto.js";
 import Rest from "../class/Restaurante.js";
 
 export default {
-  name: 'PageMesa',
+  name: 'AddProducto',
   props: {
     id: String
   },
@@ -45,7 +50,10 @@ export default {
     this.rest = Rest.$restLocal;
   },
   methods: {
-
+    addProducto (producto) {
+      let linea = new LineaPedido(1, producto);
+      Rest.$restLocal.getMesas()[parseInt(this.id) - 1].anadirLinea(linea);
+    }
   }
 }
 </script>

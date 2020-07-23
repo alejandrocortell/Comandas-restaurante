@@ -1,6 +1,19 @@
 <template>
   <q-page class="flex flex-center">
-    {{ rest }}
+    <div v-if="rest != null">
+      {{ rest.nombre }}
+      <div
+        v-for="(mesa, index) in rest.mesas"
+        :key="index"
+      >
+        <div>
+          {{ index + 1 }}
+        </div>
+        <router-link :to="{ name: 'mesa', params: {id: (index + 1).toString() } }">
+          Abrir mesa
+        </router-link>
+      </div>
+    </div>
   </q-page>
 </template>
 

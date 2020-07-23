@@ -4,7 +4,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'index', component: () => import('pages/Index.vue') },
-      { path: '/mesa/:id', name: 'mesa', component: () => import('pages/Mesa.vue'), props: true }
+      { path: '/mesa/:id', name: 'mesa', component: () => import('pages/Mesa.vue'), props: true },
+      { path: '/mesa/:id/addProducto', name: 'addProducto', component: () => import('pages/AddProducto.vue'), props: true },
     ]
   },
 

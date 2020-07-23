@@ -6,16 +6,26 @@ class Comanda {
   }
 
   // Getters
-  getId() {
+  getId () {
     return this.id;
   }
 
-  getLineasPedido() {
+  getLineasPedido () {
     return this.lineasPedido;
   }
 
-  anadirLinea(lineaPedido){
-    this.lineasPedido.push(lineaPedido);
+  anadirLinea (lineaPedido) {
+    let encontrado = false;
+    this.lineasPedido.forEach(linea => {
+      if (linea.getProducto().getNombre() === lineaPedido.getProducto().getNombre()) {
+        linea.setCantidad(linea.getCantidad() + lineaPedido.getCantidad());
+        encontrado = true;
+      }
+    });
+
+    if (!encontrado) {
+      this.lineasPedido.push(lineaPedido);
+    }
   }
 
 }

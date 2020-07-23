@@ -6,12 +6,21 @@ class LineaPedido {
   }
 
   // Getters
-  getCantidad() {
+  getCantidad () {
     return this.cantidad;
   }
 
-  getProducto() {
+  getProducto () {
     return this.producto;
+  }
+
+  // Getters
+  setCantidad (cantidad) {
+    this.cantidad = cantidad;
+  }
+
+  setProducto (producto) {
+    this.producto = producto;
   }
 
 }

@@ -19,31 +19,6 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-
-    <q-footer
-      elevated
-      class="bg-grey-8 text-white"
-    >
-      <q-tabs align="center">
-        <q-route-tab
-          to="/"
-          label="Index"
-        />
-        <q-route-tab
-          :to="{ name: 'mesa', params: {id: 1 } }"
-          label="Page One"
-        />
-        <q-route-tab
-          :to="{ name: 'mesa', params: {id: 2 } }"
-          label="Page Two"
-        />
-        <q-route-tab
-          :to="{ name: 'mesa', params: {id: 3 } }"
-          label="Page Three"
-        />
-      </q-tabs>
-    </q-footer>
-
   </q-layout>
 </template>
 
@@ -65,7 +40,7 @@ export default {
   data () {
     return {};
   },
-  created: function () {
+  created () {
     //FA.restaurarEstadoLocalStorage();
     FA.datosPrueba();
   },
