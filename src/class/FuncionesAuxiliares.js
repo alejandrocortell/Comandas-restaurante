@@ -42,6 +42,7 @@ class FuncionesAuxiliares {
     Restaurante.$restLocal.aumentarIdMesa();
 
     let linea1 = new LineaPedido(2, coca);
+    linea1.setNota("Sin hielos");
     let linea2 = new LineaPedido(1, vino);
     let linea3 = new LineaPedido(2, fanta);
     mesa1.anadirLinea(linea1);

@@ -3,6 +3,7 @@ class LineaPedido {
   constructor(cantidad, producto) {
     this.cantidad = cantidad;
     this.producto = producto;
+    this.nota = null;
   }
 
   // Getters
@@ -14,6 +15,10 @@ class LineaPedido {
     return this.producto;
   }
 
+  getNota () {
+    return this.nota;
+  }
+
   // Getters
   setCantidad (cantidad) {
     this.cantidad = cantidad;
@@ -21,6 +26,10 @@ class LineaPedido {
 
   setProducto (producto) {
     this.producto = producto;
+  }
+
+  setNota (nota) {
+    this.nota = nota;
   }
 
 }

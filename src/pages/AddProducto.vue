@@ -1,9 +1,8 @@
 <template>
-  <q-page class="flex q-pa-md fit row wrap justify-start items-start content-start">
+  <q-page class="q-pa-md">
     <div
       v-for="conjunto in productos"
       :key="conjunto.categoria.nombre"
-      class="col-12"
     >
       <h6 class="text-h6 q-my-sm">{{ conjunto.categoria.nombre }}</h6>
       <div class="row">
@@ -71,6 +70,7 @@ export default {
     this.mesa = Rest.$restLocal.getMesas()[parseInt(this.id) - 1];
     this.rest = Rest.$restLocal;
 
+    // Creación de un objeto con los productos ordenados por categorías
     this.rest.categorias.forEach(cat => {
       let catTemp = new Object();
       let prodTemp = [];
