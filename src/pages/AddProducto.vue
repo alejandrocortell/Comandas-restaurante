@@ -1,12 +1,33 @@
 <template>
-  <q-page class="flex flex-center">
+  <q-page class="flex q-pa-md fit row wrap justify-start items-start content-start">
     <div
-      v-for="(producto, index) in rest.productos"
-      :key="index"
+      v-for="conjunto in productos"
+      :key="conjunto.categoria.nombre"
+      class="col-12"
     >
-      <p>{{ producto }}</p>
-      <div @click="addProducto(producto)">Añadir producto</div>
+      <h6 class="text-h6 q-my-sm">{{ conjunto.categoria.nombre }}</h6>
+      <div class="row">
+        <div
+          v-for="producto in conjunto.productos"
+          :key="producto.nombre"
+          class="col-6 q-pa-xs"
+        >
+          <q-btn
+            @click="addProducto(producto)"
+            color="white"
+            text-color="black"
+            class="full-width"
+          >
+            <div>
+              {{ producto.nombre }}
+              <br>
+              <span class="text-weight-light">{{ producto.precio }}€</span>
+            </div>
+          </q-btn>
+        </div>
+      </div>
     </div>
+
     <q-footer
       elevated
       class="bg-grey-8 text-white"
@@ -42,12 +63,30 @@ export default {
   data () {
     return {
       mesa: null,
-      rest: null
+      rest: null,
+      productos: []
     };
   },
   created () {
     this.mesa = Rest.$restLocal.getMesas()[parseInt(this.id) - 1];
     this.rest = Rest.$restLocal;
+
+    this.rest.categorias.forEach(cat => {
+      let catTemp = new Object();
+      let prodTemp = [];
+
+      catTemp.categoria = cat;
+
+      this.rest.productos.forEach(prod => {
+        if (prod.categoria.nombre === cat.nombre) {
+          prodTemp.push(prod);
+        }
+      });
+
+      catTemp.productos = prodTemp;
+
+      this.productos.push(catTemp);
+    });
   },
   methods: {
     addProducto (producto) {
