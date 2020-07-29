@@ -6,6 +6,7 @@ const routes = [
       { path: '', name: 'index', component: () => import('pages/Index.vue') },
       { path: '/mesa/:id', name: 'mesa', component: () => import('pages/Mesa.vue'), props: true },
       { path: '/mesa/:id/addProducto', name: 'addProducto', component: () => import('pages/AddProducto.vue'), props: true },
+      { path: '/cuenta/:id', name: 'cuenta', component: () => import('pages/Cuenta.vue'), props: true },
     ]
   },
 

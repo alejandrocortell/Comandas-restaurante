@@ -20,7 +20,7 @@
             <div>
               {{ producto.nombre }}
               <br>
-              <span class="text-weight-light">{{ producto.precio }}€</span>
+              <span class="text-weight-light">{{ calculaPrecioIva(producto) }}€</span>
             </div>
           </q-btn>
         </div>
@@ -92,6 +92,9 @@ export default {
     addProducto (producto) {
       let linea = new LineaPedido(1, producto);
       Rest.$restLocal.getMesas()[parseInt(this.id) - 1].anadirLinea(linea);
+    },
+    calculaPrecioIva (producto) {
+      return FA.calculaPrecioIva(producto);
     }
   }
 }

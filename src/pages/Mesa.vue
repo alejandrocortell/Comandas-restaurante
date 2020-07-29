@@ -1,5 +1,5 @@
 <template>
-  <q-page class=" q-pa-md">
+  <q-page class="q-pa-md">
     <h6 class="text-h6 q-my-sm">Mesa {{ id }}</h6>
 
     <q-list
@@ -16,6 +16,7 @@
         clickable
         v-for="linea in mesa.lineasPedido"
         :key="linea.producto.nombre"
+        @click="modificarProducto(linea)"
       >
         <q-item-section class="col-3">{{ linea.cantidad }}</q-item-section>
         <q-item-section class="col-7">
@@ -29,6 +30,65 @@
       </q-item>
     </q-list>
 
+    <q-dialog
+      v-model="modifica"
+      full-width
+    >
+      <q-card v-if="modifica">
+        <q-card-section class="row items-center q-pb-none">
+          <div class="text-h6">{{ productoModifica.producto.nombre }}</div>
+          <q-space />
+          <q-btn
+            icon="close"
+            flat
+            round
+            dense
+            v-close-popup
+          />
+        </q-card-section>
+
+        <q-card-section>
+          <q-input
+            label="Cantidad"
+            v-model="productoModifica.cantidad"
+            mask="#####"
+          />
+          <div class="row q-py-sm">
+            <q-btn
+              class="col full-width"
+              icon="remove"
+              @click="restaProducto"
+            />
+            <q-btn
+              class="col full-width"
+              icon="add"
+              @click="sumaProducto"
+            />
+          </div>
+          <q-input
+            v-model="productoModifica.nota"
+            label="Notas"
+            class="q-mt-md"
+          />
+          <q-separator />
+          <q-btn
+            class="col full-width q-mt-md"
+            label="Eliminar producto"
+            color="red"
+            icon="delete"
+            @click="eliminaProducto"
+          />
+          <q-btn
+            class="col full-width q-mt-sm"
+            label="Guardar"
+            color="green"
+            icon="save"
+            @click="actualizaProducto"
+          />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
     <q-footer
       elevated
       class="bg-grey-8 text-white"
@@ -41,6 +101,10 @@
         <q-route-tab
           :to="{ name: 'addProducto', params: {id: id } }"
           label="Añadir producto"
+        />
+        <q-route-tab
+          :to="{ name: 'cuenta', params: {id: id } }"
+          label="Cuenta"
         />
       </q-tabs>
     </q-footer>
@@ -64,7 +128,9 @@ export default {
   data () {
     return {
       mesa: null,
-      rest: null
+      rest: null,
+      modifica: false,
+      productoModifica: null
     };
   },
   created () {
@@ -80,8 +146,48 @@ export default {
   },
   methods: {
     calculaPrecioIva (producto) {
-      let precioIva = ((parseFloat(producto.precio) + parseFloat(producto.iva.cantidad)) / 100) + parseFloat(producto.precio);
-      return Math.round(precioIva * 100) / 100;
+      return FA.calculaPrecioIva(producto);
+    },
+    modificarProducto (linea) {
+      this.modifica = true;
+      let nuevaLinea = new LineaPedido(linea.cantidad, linea.producto)
+      if (linea.nota != null) {
+        nuevaLinea.nota = linea.nota;
+      }
+      this.productoModifica = nuevaLinea;
+    },
+    sumaProducto () {
+      this.productoModifica.cantidad++;
+    },
+    restaProducto () {
+      if (this.productoModifica.cantidad > 1) {
+        this.productoModifica.cantidad--;
+      }
+    },
+    actualizaProducto () {
+      // Busca el producto con la coincidencia del nombre
+      this.mesa.lineasPedido.forEach(linea => {
+        if (linea.producto.nombre === this.productoModifica.producto.nombre) {
+          // Sustituye los datos de la línea de producto por los que hay a modificar
+          linea.cantidad = this.productoModifica.cantidad;
+          linea.producto = this.productoModifica.producto;
+          linea.nota = this.productoModifica.nota;
+
+          this.modifica = false;
+        }
+      });
+    },
+    eliminaProducto () {
+      let posicion;
+      // Busca en que posición está la línea y la almacena
+      for (let index = 0; index < this.mesa.lineasPedido.length; index++) {
+        if (this.mesa.lineasPedido[index].producto.nombre === this.productoModifica.producto.nombre) {
+          posicion = index;
+        }
+      }
+
+      this.mesa.lineasPedido.splice(posicion, 1);
+      this.modifica = false;
     }
   }
 }

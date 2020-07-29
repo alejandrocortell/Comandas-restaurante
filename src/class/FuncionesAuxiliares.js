@@ -15,6 +15,11 @@ class FuncionesAuxiliares {
     console.log("Restaurar");
   }
 
+  static calculaPrecioIva (producto) {
+    let precioIva = ((parseFloat(producto.precio) + parseFloat(producto.iva.cantidad)) / 100) + parseFloat(producto.precio);
+    return Math.round(precioIva * 100) / 100;
+  }
+
   static datosPrueba () {
     Restaurante.$restLocal = new Restaurante('Casa Pepe', 10);
 
