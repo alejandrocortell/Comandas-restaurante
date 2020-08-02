@@ -25,6 +25,7 @@ class FuncionesAuxiliares {
 
     let reducido = new Iva('reducido', 10);
     let normal = new Iva('normal', 21);
+    let sup = new Iva('super', 51);
 
     let cat1 = new Categoria('refresco');
     let cat2 = new Categoria('alcoholica');
@@ -38,6 +39,7 @@ class FuncionesAuxiliares {
     Restaurante.$restLocal.anadirCategoria(cat2);
     Restaurante.$restLocal.anadirImpuesto(reducido);
     Restaurante.$restLocal.anadirImpuesto(normal);
+    Restaurante.$restLocal.anadirImpuesto(sup);
     Restaurante.$restLocal.anadirProducto(coca);
     Restaurante.$restLocal.anadirProducto(fanta);
     Restaurante.$restLocal.anadirProducto(pepsi);

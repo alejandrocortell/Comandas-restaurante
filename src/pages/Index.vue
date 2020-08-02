@@ -1,9 +1,9 @@
 <template>
   <q-page class="q-pa-md">
-    <h6
+    <h3
       v-if="rest != null"
-      class="text-h6 q-my-sm"
-    >{{ rest.nombre }}</h6>
+      class="text-h3 q-my-md"
+    >{{ rest.nombre }}</h3>
     <div
       v-if="rest != null"
       class="row"

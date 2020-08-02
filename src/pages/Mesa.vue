@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <h6 class="text-h6 q-my-sm">Mesa {{ id }}</h6>
+    <h3 class="text-h3 q-my-sm">Mesa {{ id }}</h3>
 
     <q-list
       dense
@@ -96,7 +96,7 @@
       <q-tabs align="center">
         <q-route-tab
           to="/"
-          label="Index"
+          label="Restaurante"
         />
         <q-route-tab
           :to="{ name: 'addProducto', params: {id: id } }"
@@ -105,6 +105,7 @@
         <q-route-tab
           :to="{ name: 'cuenta', params: {id: id } }"
           label="Cuenta"
+          v-if="mesa.lineasPedido.length != 0"
         />
       </q-tabs>
     </q-footer>

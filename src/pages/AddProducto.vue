@@ -1,5 +1,8 @@
 <template>
   <q-page class="q-pa-md">
+    <h3 class="text-h3 q-my-sm">Añadir producto</h3>
+    <h6 class="text-h6 q-my-sm">Mesa {{ id }}</h6>
+
     <div
       v-for="conjunto in productos"
       :key="conjunto.categoria.nombre"
@@ -34,7 +37,7 @@
       <q-tabs align="center">
         <q-route-tab
           to="/"
-          label="Index"
+          label="Restaurante"
         />
         <q-route-tab
           :to="{ name: 'mesa', params: { id: id.toString() } }"
