@@ -1,9 +1,5 @@
 <template>
   <q-page class="q-pa-md">
-    <h3
-      v-if="rest != null"
-      class="text-h3 q-my-md"
-    >{{ rest.nombre }}</h3>
     <div
       v-if="rest != null"
       class="row"
@@ -23,6 +19,16 @@
         />
       </div>
     </div>
+    <q-page-sticky
+      position="bottom-right"
+      :offset="[18, 18]"
+    >
+      <q-btn
+        fab
+        icon="settings"
+        to="configuracion"
+      />
+    </q-page-sticky>
   </q-page>
 </template>
 
@@ -39,7 +45,9 @@ export default {
   name: 'PageIndex',
   data () {
     return {
-      rest: null
+      rest: null,
+      configuracion: false,
+      modificaNombre: ''
     };
   },
   mounted () {

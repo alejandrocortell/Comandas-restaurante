@@ -11,13 +11,13 @@
           <q-avatar>
             <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
           </q-avatar>
-          Title
+          {{ titulo }}
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
     <q-page-container>
-      <router-view />
+      <router-view @modifica-restaurante="modificaRestaurante" />
     </q-page-container>
   </q-layout>
 </template>
@@ -29,7 +29,7 @@ import Comanda from "../class/Comanda.js";
 import Iva from "../class/Iva.js";
 import LineaPedido from "../class/LineaPedido.js";
 import Producto from "../class/Producto.js";
-import Restaurante from "../class/Restaurante.js";
+import Rest from "../class/Restaurante.js";
 
 export default {
   name: 'MainLayout',
@@ -38,11 +38,20 @@ export default {
   },
 
   data () {
-    return {};
+    return {
+      titulo: ''
+    };
   },
   created () {
     //FA.restaurarEstadoLocalStorage();
     FA.datosPrueba();
+    this.titulo = Rest.$restLocal.getNombre();
   },
+  methods: {
+    modificaRestaurante (rest) {
+      Rest.$restLocal = rest;
+      this.titulo = Rest.$restLocal.getNombre();
+    }
+  }
 };
 </script>
