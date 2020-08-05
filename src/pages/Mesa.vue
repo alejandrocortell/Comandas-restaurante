@@ -115,7 +115,7 @@
 <script>
 import FA from "../class/FuncionesAuxiliares.js";
 import Categoria from "../class/Categoria.js";
-import Comanda from "../class/Comanda.js";
+import Mesa from "../class/Mesa.js";
 import Iva from "../class/Iva.js";
 import LineaPedido from "../class/LineaPedido.js";
 import Producto from "../class/Producto.js";
@@ -137,7 +137,7 @@ export default {
   created () {
     //Creación de la mesa si etá vacia
     if (Rest.$restLocal.getMesas()[parseInt(this.id) - 1] === null) {
-      let mesa = new Comanda(Rest.$restLocal.getIdMesa());
+      let mesa = new Mesa(Rest.$restLocal.getIdMesa());
       Rest.$restLocal.aumentarIdMesa();
       Rest.$restLocal.anadirMesa(parseInt(this.id) - 1, mesa);
     }

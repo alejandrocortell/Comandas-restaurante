@@ -1,5 +1,5 @@
-// Clase comanda
-class Comanda {
+// Clase mesa
+class Mesa {
   constructor(id) {
     this.id = id;
     this.lineasPedido = new Array();
@@ -30,4 +30,4 @@ class Comanda {
 
 }
 
-export default Comanda;
+export default Mesa;

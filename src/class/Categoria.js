@@ -1,16 +1,21 @@
 // Clase Categoria
 class Categoria {
-  constructor(nombre) {
+  constructor(id, nombre) {
+    this.id = id;
     this.nombre = nombre;
   }
 
   // Getters
-  getNombre() {
+  getId () {
+    return this.id;
+  }
+
+  getNombre () {
     return this.nombre;
   }
 
   // Setters
-  setNombre(nombre) {
+  setNombre (nombre) {
     this.nombre = nombre;
   }
 

@@ -1,6 +1,7 @@
 // Clase Producto
 class Producto {
-  constructor(nombre, categoria, precio, iva) {
+  constructor(id, nombre, categoria, precio, iva) {
+    this.id = id;
     this.nombre = nombre;
     this.categoria = categoria;
     this.precio = precio;
@@ -8,36 +9,40 @@ class Producto {
   }
 
   // Getters
-  getNombre() {
+  getId () {
+    return this.id;
+  }
+
+  getNombre () {
     return this.nombre;
   }
 
-  getCategoria() {
+  getCategoria () {
     return this.categoria;
   }
 
-  getPrecio() {
+  getPrecio () {
     return this.precio;
   }
 
-  getIva() {
+  getIva () {
     return this.iva;
   }
 
   // Setters
-  setNombre(nombre) {
+  setNombre (nombre) {
     this.nombre = nombre;
   }
 
-  setCategoria(categoria) {
+  setCategoria (categoria) {
     this.categoria = categoria;
   }
 
-  setPrecio(precio) {
+  setPrecio (precio) {
     this.precio = precio;
   }
 
-  setIva(iva) {
+  setIva (iva) {
     this.iva = iva;
   }
 

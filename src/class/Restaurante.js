@@ -9,6 +9,9 @@ class Restaurante {
     }
 
     this.idMesa = 1;
+    this.idProducto = 1;
+    this.idImpuesto = 1;
+    this.idCategoria = 1;
     this.productos = new Array();
     this.impuestos = new Array();
     this.categorias = new Array();
@@ -16,78 +19,102 @@ class Restaurante {
   }
 
   // Getters
-  getNombre() {
+  getNombre () {
     return this.nombre;
   }
 
-  getMesas() {
+  getMesas () {
     return this.mesas;
   }
 
-  getIdMesa() {
+  getIdMesa () {
     return this.idMesa;
   }
 
-  getProductos() {
+  getIdProducto () {
+    return this.idProducto;
+  }
+
+  getIdImpuesto () {
+    return this.idImpuesto;
+  }
+
+  getIdCategoria () {
+    return this.idCategoria;
+  }
+
+  getProductos () {
     return this.productos;
   }
 
-  getImpuestos() {
+  getImpuestos () {
     return this.impuestos;
   }
 
-  getCategorias() {
+  getCategorias () {
     return this.categorias;
   }
 
-  getHistorico() {
+  getHistorico () {
     return this.historico;
   }
 
   // Setters
-  setNombre(nombre) {
+  setNombre (nombre) {
     this.nombre = nombre;
   }
 
-  aumentarIdMesa(){
+  aumentarIdMesa () {
     this.idMesa++;
   }
-/*
-  setMesas(mesas) {
-    this.mesas = mesas;
+
+  aumentarIdImpuesto () {
+    this.idImpuesto++;
   }
 
-  setProductos(productos) {
-    this.productos = productos;
+  aumentarIdCategoria () {
+    this.idCategoria++;
   }
 
-  setImpuestos(impuestos) {
-    this.impuestos = impuestos;
+  aumentarIdProducto () {
+    this.idProducto++;
   }
-
-  setHistorico(historico) {
-    this.historico = historico;
-  }
-*/
+  /*
+    setMesas(mesas) {
+      this.mesas = mesas;
+    }
+  
+    setProductos(productos) {
+      this.productos = productos;
+    }
+  
+    setImpuestos(impuestos) {
+      this.impuestos = impuestos;
+    }
+  
+    setHistorico(historico) {
+      this.historico = historico;
+    }
+  */
   // Agregar y borrar elementos de los arrays
-  anadirMesa(numMesa, comanda) {
-    this.mesas[numMesa] = comanda;
+  anadirMesa (numMesa, mesa) {
+    this.mesas[numMesa] = mesa;
   }
 
-  cerrarMesa(numMesa){
+  cerrarMesa (numMesa) {
     this.mesas[numMesa] = null;
   }
 
-  anadirProducto(producto){
+  anadirProducto (producto) {
     this.productos.push(producto);
   }
 
-  eliminarProducto(producto){
+  eliminarProducto (producto) {
     let nombre = producto.getNombre();
     let posicion;
 
     for (let index = 0; index < this.productos.length; index++) {
-      if(this.productos[index].getNombre() == nombre){
+      if (this.productos[index].getNombre() == nombre) {
         posicion = index;
         break;
       }
@@ -96,16 +123,16 @@ class Restaurante {
     this.productos.splice(posicion, 1);
   }
 
-  anadirImpuesto(iva){
+  anadirImpuesto (iva) {
     this.impuestos.push(iva);
   }
 
-  eliminarImpuesto(iva){
+  eliminarImpuesto (iva) {
     let nombre = iva.getNombre();
     let posicion;
 
     for (let index = 0; index < this.impuestos.length; index++) {
-      if(this.impuestos[index].getNombre() == nombre){
+      if (this.impuestos[index].getNombre() == nombre) {
         posicion = index;
         break;
       }
@@ -114,16 +141,16 @@ class Restaurante {
     this.impuestos.splice(posicion, 1);
   }
 
-  anadirCategoria(categoria){
+  anadirCategoria (categoria) {
     this.categorias.push(categoria);
   }
 
-  eliminarCategoria(categoria){
+  eliminarCategoria (categoria) {
     let nombre = categoria.getNombre();
     let posicion;
 
     for (let index = 0; index < this.categorias.length; index++) {
-      if(this.categorias[index].getNombre() == nombre){
+      if (this.categorias[index].getNombre() == nombre) {
         posicion = index;
         break;
       }
@@ -132,8 +159,8 @@ class Restaurante {
     this.categorias.splice(posicion, 1);
   }
 
-  anadirHistorico(comanda){
-    this.historico.push(comanda);
+  anadirHistorico (mesa) {
+    this.historico.push(mesa);
   }
 }
 

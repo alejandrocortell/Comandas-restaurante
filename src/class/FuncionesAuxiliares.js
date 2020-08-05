@@ -1,5 +1,5 @@
 import Categoria from "../class/Categoria.js";
-import Comanda from "../class/Comanda.js";
+import Mesa from "./Mesa.js";
 import Iva from "../class/Iva.js";
 import LineaPedido from "../class/LineaPedido.js";
 import Producto from "../class/Producto.js";
@@ -23,29 +23,37 @@ class FuncionesAuxiliares {
   static datosPrueba () {
     Restaurante.$restLocal = new Restaurante('Casa Pepe', 10);
 
-    let reducido = new Iva('reducido', 10);
-    let normal = new Iva('normal', 21);
-    let sup = new Iva('super', 51);
-
-    let cat1 = new Categoria('refresco');
-    let cat2 = new Categoria('alcoholica');
-
-    let coca = new Producto('Coca-cola', cat1, 1, reducido);
-    let fanta = new Producto('fanta', cat1, 1.2, reducido);
-    let pepsi = new Producto('Pepsi', cat1, 0.8, normal);
-    let vino = new Producto('Vino', cat2, 2, normal);
-
-    Restaurante.$restLocal.anadirCategoria(cat1);
-    Restaurante.$restLocal.anadirCategoria(cat2);
+    let reducido = new Iva(Restaurante.$restLocal.getIdImpuesto(), 'reducido', 10);
     Restaurante.$restLocal.anadirImpuesto(reducido);
+    Restaurante.$restLocal.aumentarIdImpuesto();
+    let normal = new Iva(Restaurante.$restLocal.getIdImpuesto(), 'normal', 21);
     Restaurante.$restLocal.anadirImpuesto(normal);
+    Restaurante.$restLocal.aumentarIdImpuesto();
+    let sup = new Iva(Restaurante.$restLocal.getIdImpuesto(), 'super', 51);
     Restaurante.$restLocal.anadirImpuesto(sup);
-    Restaurante.$restLocal.anadirProducto(coca);
-    Restaurante.$restLocal.anadirProducto(fanta);
-    Restaurante.$restLocal.anadirProducto(pepsi);
-    Restaurante.$restLocal.anadirProducto(vino);
+    Restaurante.$restLocal.aumentarIdImpuesto();
 
-    let mesa1 = new Comanda(Restaurante.$restLocal.getIdMesa());
+    let cat1 = new Categoria(Restaurante.$restLocal.getIdCategoria(), 'refresco');
+    Restaurante.$restLocal.anadirCategoria(cat1);
+    Restaurante.$restLocal.aumentarIdCategoria();
+    let cat2 = new Categoria(Restaurante.$restLocal.getIdCategoria(), 'alcoholica');
+    Restaurante.$restLocal.anadirCategoria(cat2);
+    Restaurante.$restLocal.aumentarIdCategoria();
+
+    let coca = new Producto(Restaurante.$restLocal.getIdProducto(), 'Coca-cola', cat1, 1, reducido);
+    Restaurante.$restLocal.anadirProducto(coca);
+    Restaurante.$restLocal.aumentarIdProducto();
+    let fanta = new Producto(Restaurante.$restLocal.getIdProducto(), 'fanta', cat1, 1.2, reducido);
+    Restaurante.$restLocal.anadirProducto(fanta);
+    Restaurante.$restLocal.aumentarIdProducto();
+    let pepsi = new Producto(Restaurante.$restLocal.getIdProducto(), 'Pepsi', cat1, 0.8, normal);
+    Restaurante.$restLocal.anadirProducto(pepsi);
+    Restaurante.$restLocal.aumentarIdProducto();
+    let vino = new Producto(Restaurante.$restLocal.getIdProducto(), 'Vino', cat2, 2, normal);
+    Restaurante.$restLocal.anadirProducto(vino);
+    Restaurante.$restLocal.aumentarIdProducto();
+
+    let mesa1 = new Mesa(Restaurante.$restLocal.getIdMesa());
     Restaurante.$restLocal.aumentarIdMesa();
 
     let linea1 = new LineaPedido(2, coca);
@@ -57,7 +65,7 @@ class FuncionesAuxiliares {
     mesa1.anadirLinea(linea3);
     Restaurante.$restLocal.anadirMesa(0, mesa1);
 
-    let mesa2 = new Comanda(Restaurante.$restLocal.getIdMesa());
+    let mesa2 = new Mesa(Restaurante.$restLocal.getIdMesa());
     Restaurante.$restLocal.aumentarIdMesa();
 
     let linea4 = new LineaPedido(5, coca);

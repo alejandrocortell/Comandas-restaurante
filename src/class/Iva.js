@@ -1,25 +1,30 @@
 // Clase Iva
 class Iva {
-  constructor(nombre, cantidad) {
+  constructor(id, nombre, cantidad) {
+    this.id = id;
     this.nombre = nombre;
     this.cantidad = cantidad;
   }
 
   // Getters
-  getNombre() {
+  getId () {
+    return this.id;
+  }
+
+  getNombre () {
     return this.nombre;
   }
 
-  getCantidad() {
+  getCantidad () {
     return this.cantidad;
   }
 
   // Setters
-  setNombre(nombre) {
+  setNombre (nombre) {
     this.nombre = nombre;
   }
 
-  setCantidad(cantidad) {
+  setCantidad (cantidad) {
     this.cantidad = cantidad;
   }
 
