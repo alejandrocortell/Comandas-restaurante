@@ -101,6 +101,7 @@ export default {
     // Objeto para los ivas acumulados
     this.rest.impuestos.forEach(impuesto => {
       let nuevoIva = Object();
+      nuevoIva.id = impuesto.id;
       nuevoIva.nombre = impuesto.nombre;
       nuevoIva.cantidad = impuesto.cantidad;
       nuevoIva.acumulado = 0;
@@ -109,11 +110,11 @@ export default {
 
     this.mesa.lineasPedido.forEach(linea => {
       // Cálculo de la base imponible
-      this.baseImponible += (Math.round((linea.producto.precio * linea.cantidad) * 100) / 100) * linea.cantidad;
+      this.baseImponible += Math.round((linea.producto.precio * linea.cantidad) * 100) / 100;
 
       // Cálculo de cada tipo de iva
       this.iva.forEach(i => {
-        if (i.nombre === linea.producto.iva.nombre) {
+        if (i.id === linea.producto.iva.id) {
           // Redondea a 2 decimales y suma el valor del iva
           i.acumulado += Math.round((((linea.producto.precio * linea.producto.iva.cantidad) / 100) * linea.cantidad) * 100) / 100;
         }
@@ -132,10 +133,7 @@ export default {
       this.rest.historico.push(this.mesa);
       this.rest.mesas[this.id - 1] = null;
 
-
       this.$router.push({ name: 'index' })
-
-      console.log('Ceerrrarrr');
     }
   }
 }

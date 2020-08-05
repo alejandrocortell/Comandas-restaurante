@@ -168,9 +168,9 @@ export default {
     actualizaProducto () {
       // Busca el producto con la coincidencia del nombre
       this.mesa.lineasPedido.forEach(linea => {
-        if (linea.producto.nombre === this.productoModifica.producto.nombre) {
+        if (linea.producto.id === this.productoModifica.producto.id) {
           // Sustituye los datos de la línea de producto por los que hay a modificar
-          linea.cantidad = this.productoModifica.cantidad;
+          linea.cantidad = parseInt(this.productoModifica.cantidad);
           linea.producto = this.productoModifica.producto;
           linea.nota = this.productoModifica.nota;
 
@@ -182,7 +182,7 @@ export default {
       let posicion;
       // Busca en que posición está la línea y la almacena
       for (let index = 0; index < this.mesa.lineasPedido.length; index++) {
-        if (this.mesa.lineasPedido[index].producto.nombre === this.productoModifica.producto.nombre) {
+        if (this.mesa.lineasPedido[index].producto.id === this.productoModifica.producto.id) {
           posicion = index;
         }
       }

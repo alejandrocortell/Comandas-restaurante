@@ -81,7 +81,7 @@ export default {
       catTemp.categoria = cat;
 
       this.rest.productos.forEach(prod => {
-        if (prod.categoria.nombre === cat.nombre) {
+        if (prod.categoria.id === cat.id) {
           prodTemp.push(prod);
         }
       });

@@ -17,8 +17,8 @@ class Mesa {
   anadirLinea (lineaPedido) {
     let encontrado = false;
     this.lineasPedido.forEach(linea => {
-      if (linea.getProducto().getNombre() === lineaPedido.getProducto().getNombre()) {
-        linea.setCantidad(linea.getCantidad() + lineaPedido.getCantidad());
+      if (linea.getProducto().getId() === lineaPedido.getProducto().getId()) {
+        linea.setCantidad(parseInt(linea.getCantidad()) + parseInt(lineaPedido.getCantidad()));
         encontrado = true;
       }
     });
