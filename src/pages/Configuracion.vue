@@ -1,25 +1,33 @@
 <template>
   <q-page class="q-pa-md">
     <h3 class="text-h3 q-my-sm">Configuración</h3>
-    <q-input
-      label="Nombre restaurante"
-      v-model="modificaNombre"
-    />
-    <q-btn
-      class="col full-width q-mt-md"
-      label="Guardar nombre"
-      @click="modificarNombre"
-    />
-    <q-input
-      label="Número de mesas"
-      v-model="nMesas"
-      mask="####"
-    />
-    <q-btn
-      class="col full-width q-mt-md"
-      label="Modificar número de mesas"
-      @click="modificarMesas"
-    />
+    <div class="flex">
+      <q-input
+        label="Nombre restaurante"
+        v-model="modificaNombre"
+        class="col"
+      />
+      <q-btn
+        class="col-4 q-mt-md q-ml-md"
+        round
+        icon="save"
+        @click="modificarNombre"
+      />
+    </div>
+    <div class="flex">
+      <q-input
+        label="Número de mesas"
+        v-model="nMesas"
+        mask="####"
+        class="col"
+      />
+      <q-btn
+        class="col-4 q-mt-md q-ml-md"
+        round
+        icon="save"
+        @click="modificarMesas"
+      />
+    </div>
     <q-btn
       class="col full-width q-mt-md"
       label="Modificar impuestos"
@@ -52,7 +60,7 @@
 <script>
 import FA from "../class/FuncionesAuxiliares.js";
 import Categoria from "../class/Categoria.js";
-import Comanda from "../class/Comanda.js";
+import Mesa from "../class/Mesa.js";
 import Iva from "../class/Iva.js";
 import LineaPedido from "../class/LineaPedido.js";
 import Producto from "../class/Producto.js";

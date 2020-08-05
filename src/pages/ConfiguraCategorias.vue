@@ -1,6 +1,6 @@
 <template>
   <q-page class="q-pa-md">
-    <h3 class="text-h3 q-my-sm">Configuración categorías</h3>
+    <h5 class="text-h5 q-my-sm">Configuración categorías</h5>
 
     <q-footer
       elevated
@@ -19,7 +19,7 @@
 <script>
 import FA from "../class/FuncionesAuxiliares.js";
 import Categoria from "../class/Categoria.js";
-import Comanda from "../class/Comanda.js";
+import Mesa from "../class/Mesa.js";
 import Iva from "../class/Iva.js";
 import LineaPedido from "../class/LineaPedido.js";
 import Producto from "../class/Producto.js";
