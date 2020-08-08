@@ -16,7 +16,7 @@ class FuncionesAuxiliares {
   }
 
   static calculaPrecioIva (producto) {
-    let precioIva = ((parseFloat(producto.precio) + parseFloat(producto.iva.cantidad)) / 100) + parseFloat(producto.precio);
+    let precioIva = ((parseFloat(producto.precio) * parseFloat(producto.iva.cantidad)) / 100) + parseFloat(producto.precio);
     return Math.round(precioIva * 100) / 100;
   }
 

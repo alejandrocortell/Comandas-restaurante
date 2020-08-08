@@ -12,7 +12,7 @@
       <q-item
         clickable
         v-for="iva in rest.impuestos"
-        :key="iva.nombre"
+        :key="iva.id"
         @click="modificarImpuesto(iva)"
       >
         <q-item-section class="col-9">{{ iva.nombre }}</q-item-section>
