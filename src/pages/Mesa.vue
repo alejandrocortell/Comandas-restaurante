@@ -156,14 +156,17 @@ export default {
         nuevaLinea.nota = linea.nota;
       }
       this.productoModifica = nuevaLinea;
+      FA.guardarEstadoLocalStorage();
     },
     sumaProducto () {
       this.productoModifica.cantidad++;
+      FA.guardarEstadoLocalStorage();
     },
     restaProducto () {
       if (this.productoModifica.cantidad > 1) {
         this.productoModifica.cantidad--;
       }
+      FA.guardarEstadoLocalStorage();
     },
     actualizaProducto () {
       // Busca el producto con la coincidencia del nombre
@@ -177,6 +180,7 @@ export default {
           this.modifica = false;
         }
       });
+      FA.guardarEstadoLocalStorage();
     },
     eliminaProducto () {
       let posicion;
@@ -189,6 +193,7 @@ export default {
 
       this.mesa.lineasPedido.splice(posicion, 1);
       this.modifica = false;
+      FA.guardarEstadoLocalStorage();
     }
   }
 }

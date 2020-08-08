@@ -136,6 +136,7 @@ export default {
       }
 
       this.modifica = false;
+      FA.guardarEstadoLocalStorage();
     },
     eliminarImpuesto () {
       let productoUsado = false;
@@ -168,6 +169,7 @@ export default {
             "lo tienen asignado. Quita el impuesto a esos productos. Ej. " + ejemploProducto
         });
       }
+      FA.guardarEstadoLocalStorage();
     },
     anadirImpuesto () {
       this.modifica = true;

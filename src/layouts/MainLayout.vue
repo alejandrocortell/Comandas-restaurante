@@ -43,14 +43,15 @@ export default {
     };
   },
   created () {
-    //FA.restaurarEstadoLocalStorage();
-    FA.datosPrueba();
+    FA.restaurarEstadoLocalStorage();
+    //FA.datosPrueba();
     this.titulo = Rest.$restLocal.getNombre();
   },
   methods: {
     modificaRestaurante (rest) {
       Rest.$restLocal = rest;
       this.titulo = Rest.$restLocal.getNombre();
+      FA.guardarEstadoLocalStorage();
     }
   }
 };

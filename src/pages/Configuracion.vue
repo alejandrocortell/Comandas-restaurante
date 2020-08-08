@@ -30,17 +30,17 @@
     </div>
     <q-btn
       class="col full-width q-mt-md"
-      label="Modificar impuestos"
+      label="Impuestos"
       to="configuracion/impuestos"
     />
     <q-btn
       class="col full-width q-mt-md"
-      label="Modificar categorías de producto"
+      label="Categorías de producto"
       to="configuracion/categorias"
     />
     <q-btn
       class="col full-width q-mt-md"
-      label="Modificar productos"
+      label="Productos"
       to="configuracion/productos"
     />
     <q-footer
@@ -121,6 +121,7 @@ export default {
           });
         }
       }
+      FA.guardarEstadoLocalStorage();
     }
   }
 }

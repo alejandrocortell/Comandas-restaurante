@@ -79,11 +79,11 @@ class Restaurante {
   aumentarIdProducto () {
     this.idProducto++;
   }
+
+  setMesas (mesas) {
+    this.mesas = mesas;
+  }
   /*
-    setMesas(mesas) {
-      this.mesas = mesas;
-    }
-  
     setProductos(productos) {
       this.productos = productos;
     }

@@ -7,12 +7,68 @@ import Restaurante from "../class/Restaurante.js";
 
 class FuncionesAuxiliares {
   static guardarEstadoLocalStorage () {
-    //localStorage.setItem("usuarioLocal", JSON.stringify(Usuario.$usuarioLocal));
-    console.log("Guardar");
+    localStorage.setItem("restauranteLocal", JSON.stringify(Restaurante.$restLocal));
   }
 
   static restaurarEstadoLocalStorage () {
-    console.log("Restaurar");
+    if (!localStorage["restauranteLocal"]) {
+      Restaurante.$restLocal = new Restaurante('', 0);
+    } else {
+      let datos = JSON.parse(localStorage.getItem("restauranteLocal"));
+      Restaurante.$restLocal = new Restaurante(datos.nombre, datos.mesas.length);
+
+      datos.categorias.forEach(categoria => {
+        let cat = new Categoria(Restaurante.$restLocal.getIdCategoria(), categoria.nombre);
+        Restaurante.$restLocal.anadirCategoria(cat);
+        Restaurante.$restLocal.aumentarIdCategoria();
+      });
+
+      datos.impuestos.forEach(impuesto => {
+        let iva = new Iva(Restaurante.$restLocal.getIdImpuesto(), impuesto.nombre, impuesto.cantidad);
+        Restaurante.$restLocal.anadirImpuesto(iva);
+        Restaurante.$restLocal.aumentarIdImpuesto();
+      });
+
+      datos.productos.forEach(producto => {
+        let prod = new Producto(Restaurante.$restLocal.getIdProducto(), producto.nombre, producto.categoria, producto.precio, producto.iva);
+        Restaurante.$restLocal.anadirProducto(prod);
+        Restaurante.$restLocal.aumentarIdProducto();
+      });
+
+      datos.mesas.forEach(m => {
+        let mesa = new Mesa(Restaurante.$restLocal.getIdMesa());
+        Restaurante.$restLocal.aumentarIdMesa();
+        if (m !== null) {
+          m.lineasPedido.forEach(linea => {
+            let iva = new Iva(linea.producto.iva.id, linea.producto.iva.nombre, linea.producto.iva.cantidad);
+            let cat = new Categoria(linea.producto.categoria.id, linea.producto.categoria.nombre);
+            let prod = new Producto(linea.producto.id, linea.producto.nombre, cat, linea.producto.precio, iva);
+            let lineaNueva = new LineaPedido(parseInt(linea.cantidad), prod);
+
+            mesa.anadirLinea(lineaNueva);
+          });
+
+          Restaurante.$restLocal.anadirMesa(m.id, mesa);
+        }
+
+      });
+
+      datos.historico.forEach(m => {
+        let mesa = new Mesa(Restaurante.$restLocal.getIdMesa());
+        Restaurante.$restLocal.aumentarIdMesa();
+
+        m.lineasPedido.forEach(linea => {
+          let iva = new Iva(linea.producto.iva.id, linea.producto.iva.nombre, linea.producto.iva.cantidad);
+          let cat = new Categoria(linea.producto.categoria.id, linea.producto.categoria.nombre);
+          let prod = new Producto(linea.producto.id, linea.producto.nombre, cat, linea.producto.precio, iva);
+          let lineaNueva = new LineaPedido(parseInt(linea.cantidad), prod);
+
+          mesa.anadirLinea(lineaNueva);
+        });
+
+        Restaurante.$restLocal.anadirHistorico(mesa);
+      });
+    }
   }
 
   static calculaPrecioIva (producto) {

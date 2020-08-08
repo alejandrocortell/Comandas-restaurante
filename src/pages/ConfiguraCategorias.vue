@@ -128,6 +128,7 @@ export default {
       }
 
       this.modifica = false;
+      FA.guardarEstadoLocalStorage();
     },
     eliminarCategoria () {
       let productoUsado = false;
@@ -160,6 +161,7 @@ export default {
             "lo tienen asignado. Quita la categoría a esos productos. Ej. " + ejemploProducto
         });
       }
+      FA.guardarEstadoLocalStorage();
     },
     anadirCategoria () {
       this.modifica = true;

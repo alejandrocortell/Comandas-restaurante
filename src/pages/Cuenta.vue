@@ -132,6 +132,7 @@ export default {
     cerrarMesa () {
       this.rest.historico.push(this.mesa);
       this.rest.mesas[this.id - 1] = null;
+      FA.guardarEstadoLocalStorage();
 
       this.$router.push({ name: 'index' })
     }

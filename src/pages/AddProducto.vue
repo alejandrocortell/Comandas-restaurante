@@ -95,6 +95,7 @@ export default {
     addProducto (producto) {
       let linea = new LineaPedido(1, producto);
       Rest.$restLocal.getMesas()[parseInt(this.id) - 1].anadirLinea(linea);
+      FA.guardarEstadoLocalStorage();
     },
     calculaPrecioIva (producto) {
       return FA.calculaPrecioIva(producto);

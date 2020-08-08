@@ -190,6 +190,7 @@ export default {
         this.rest.productos.push(producto);
         this.modifica = false;
       }
+      FA.guardarEstadoLocalStorage();
     },
     eliminarProducto () {
       let productoUsado = false;
@@ -226,6 +227,7 @@ export default {
             "lo tienen asignado. Quita el producto a esas mesas. Ej. " + ejemploMesa
         });
       }
+      FA.guardarEstadoLocalStorage();
     },
     anadirProducto () {
       this.modifica = true;
