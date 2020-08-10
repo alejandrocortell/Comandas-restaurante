@@ -12,7 +12,7 @@ class FuncionesAuxiliares {
 
   static restaurarEstadoLocalStorage () {
     if (!localStorage["restauranteLocal"]) {
-      Restaurante.$restLocal = new Restaurante('', 0);
+      return false;
     } else {
       let datos = JSON.parse(localStorage.getItem("restauranteLocal"));
       Restaurante.$restLocal = new Restaurante(datos.nombre, datos.mesas.length);
@@ -68,6 +68,8 @@ class FuncionesAuxiliares {
 
         Restaurante.$restLocal.anadirHistorico(mesa);
       });
+
+      return true;
     }
   }
 

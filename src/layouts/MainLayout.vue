@@ -43,9 +43,11 @@ export default {
     };
   },
   created () {
-    FA.restaurarEstadoLocalStorage();
-    //FA.datosPrueba();
-    this.titulo = Rest.$restLocal.getNombre();
+    if (!FA.restaurarEstadoLocalStorage()) {
+      this.$router.push({ name: 'configuracionInicial' })
+    } else {
+      this.titulo = Rest.$restLocal.getNombre();
+    }
   },
   methods: {
     modificaRestaurante (rest) {

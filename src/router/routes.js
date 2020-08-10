@@ -11,6 +11,7 @@ const routes = [
       { path: '/configuracion/impuestos', name: 'configuracionImpuestos', component: () => import('pages/ConfiguraImpuestos.vue') },
       { path: '/configuracion/categorias', name: 'configuracionCategorias', component: () => import('pages/ConfiguraCategorias.vue') },
       { path: '/configuracion/productos', name: 'configuracionProductos', component: () => import('pages/ConfiguraProductos.vue') },
+      { path: '/bienvenida', name: 'configuracionInicial', component: () => import('pages/ConfiguracionInicial.vue') },
     ]
   },
 
