@@ -44,18 +44,21 @@ class FuncionesAuxiliares {
             let cat = new Categoria(linea.producto.categoria.id, linea.producto.categoria.nombre);
             let prod = new Producto(linea.producto.id, linea.producto.nombre, cat, linea.producto.precio, iva);
             let lineaNueva = new LineaPedido(parseInt(linea.cantidad), prod);
+            console.log(lineaNueva)
+            if (linea.nota != null) {
+              lineaNueva.setNota(linea.nota)
+            }
 
             mesa.anadirLinea(lineaNueva);
           });
 
-          Restaurante.$restLocal.anadirMesa(m.id, mesa);
+          Restaurante.$restLocal.anadirMesa(m.id - 1, mesa);
         }
 
       });
 
       datos.historico.forEach(m => {
-        let mesa = new Mesa(Restaurante.$restLocal.getIdMesa());
-        Restaurante.$restLocal.aumentarIdMesa();
+        let mesa = new Mesa(m.id);
 
         m.lineasPedido.forEach(linea => {
           let iva = new Iva(linea.producto.iva.id, linea.producto.iva.nombre, linea.producto.iva.cantidad);

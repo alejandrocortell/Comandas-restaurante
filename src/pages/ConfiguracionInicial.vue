@@ -289,21 +289,12 @@ export default {
       nombreRestaurante: '',
       nMesas: '',
       nuevaCategoria: '',
-      categorias: [/*'una', 'dos'*/],
+      categorias: [],
       nuevoIva: {
         nombre: '',
         cantidad: ''
       },
-      impuestos: [
-        /*{
-          nombre: 'normal',
-          cantidad: 21
-        },
-        {
-          nombre: 'reducido',
-          cantidad: 10
-        }*/
-      ],
+      impuestos: [],
       nuevoProducto: {
         nombre: '',
         precio: '',

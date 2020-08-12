@@ -83,19 +83,7 @@ class Restaurante {
   setMesas (mesas) {
     this.mesas = mesas;
   }
-  /*
-    setProductos(productos) {
-      this.productos = productos;
-    }
-  
-    setImpuestos(impuestos) {
-      this.impuestos = impuestos;
-    }
-  
-    setHistorico(historico) {
-      this.historico = historico;
-    }
-  */
+
   // Agregar y borrar elementos de los arrays
   anadirMesa (numMesa, mesa) {
     this.mesas[numMesa] = mesa;
