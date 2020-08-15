@@ -37,27 +37,31 @@ class FuncionesAuxiliares {
         Restaurante.$restLocal.aumentarIdProducto();
       });
 
-      datos.mesas.forEach(m => {
+      // Realiza la siguiente función por cada elemento de mesas
+      datos.mesas.forEach(funcion);
+
+      function funcion (m, index, arr) {
+        // Crea la mesa
         let mesa = new Mesa(Restaurante.$restLocal.getIdMesa());
-        Restaurante.$restLocal.aumentarIdMesa();
         if (m !== null) {
+          Restaurante.$restLocal.aumentarIdMesa();
+          //Crea las lineas de pedido de esa mesa
           m.lineasPedido.forEach(linea => {
             let iva = new Iva(linea.producto.iva.id, linea.producto.iva.nombre, linea.producto.iva.cantidad);
             let cat = new Categoria(linea.producto.categoria.id, linea.producto.categoria.nombre);
             let prod = new Producto(linea.producto.id, linea.producto.nombre, cat, linea.producto.precio, iva);
             let lineaNueva = new LineaPedido(parseInt(linea.cantidad), prod);
-            console.log(lineaNueva)
+
             if (linea.nota != null) {
               lineaNueva.setNota(linea.nota)
             }
-
+            // Inserción de linea en la mesa
             mesa.anadirLinea(lineaNueva);
           });
-
-          Restaurante.$restLocal.anadirMesa(m.id - 1, mesa);
+          // Inserción de la mesa en el restaurante, en la posición del index
+          Restaurante.$restLocal.anadirMesa(index, mesa);
         }
-
-      });
+      }
 
       datos.historico.forEach(m => {
         let mesa = new Mesa(m.id);
