@@ -130,6 +130,7 @@ export default {
   },
   methods: {
     cerrarMesa () {
+      // Introducción de la mesa en historicos, borrado de mesa actual y guardado
       this.rest.historico.push(this.mesa);
       this.rest.mesas[this.id - 1] = null;
       FA.guardarEstadoLocalStorage();

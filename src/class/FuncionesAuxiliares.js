@@ -12,8 +12,10 @@ class FuncionesAuxiliares {
 
   static restaurarEstadoLocalStorage () {
     if (!localStorage["restauranteLocal"]) {
+      // Si no existe devuelve false para cargar la página de bienvenida
       return false;
     } else {
+      // Creación del restaurante y guardarlo en memoria
       let datos = JSON.parse(localStorage.getItem("restauranteLocal"));
       Restaurante.$restLocal = new Restaurante(datos.nombre, datos.mesas.length);
 
@@ -81,6 +83,7 @@ class FuncionesAuxiliares {
     return Math.round(precioIva * 100) / 100;
   }
 
+  // Función para cargar datos durante el desarrollo
   static datosPrueba () {
     Restaurante.$restLocal = new Restaurante('Casa Pepe', 10);
 

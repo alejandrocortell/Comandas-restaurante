@@ -328,12 +328,13 @@ export default {
       }
     },
     borrarImpuesto (iva) {
-      this.impuestos.splice(this.impuestos.indexOf(iva), 1)
+      this.impuestos.splice(this.impuestos.indexOf(iva), 1);
     },
     anadirProducto () {
       if (this.nuevoProducto.nombre !== '' && this.nuevoProducto.precio !== '' &&
         this.nuevoProducto.iva !== '' && this.nuevoProducto.categoria !== '') {
 
+        // Para guardar el producto, de momento solo almacenamos el nombre de cat e iva
         let nuevoProducto = new Object();
         nuevoProducto.nombre = this.nuevoProducto.nombre;
         nuevoProducto.precio = parseInt(this.nuevoProducto.precio);
@@ -350,6 +351,7 @@ export default {
     borrarProducto (prod) {
       this.productos.splice(this.productos.indexOf(prod), 1)
     },
+    // Se crea el restuaurante con todos los datos almacenados en data
     finConfiguracion () {
       Restaurante.$restLocal = new Restaurante(this.nombreRestaurante, parseInt(this.nMesas));
 
@@ -369,6 +371,7 @@ export default {
         let categoria;
         let impuesto;
 
+        // Se almacena el objeto Categoria e Iva para introducir ese objeto en el objeto producto
         Restaurante.$restLocal.getCategorias().forEach(cat => {
           if (producto.categoria === cat.nombre) {
             categoria = cat;

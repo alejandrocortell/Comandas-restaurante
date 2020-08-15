@@ -98,17 +98,7 @@ class Restaurante {
   }
 
   eliminarProducto (producto) {
-    let nombre = producto.getNombre();
-    let posicion;
-
-    for (let index = 0; index < this.productos.length; index++) {
-      if (this.productos[index].getNombre() == nombre) {
-        posicion = index;
-        break;
-      }
-    }
-
-    this.productos.splice(posicion, 1);
+    this.productos.splice(this.productos.indexOf(producto), 1)
   }
 
   anadirImpuesto (iva) {
@@ -116,17 +106,7 @@ class Restaurante {
   }
 
   eliminarImpuesto (iva) {
-    let nombre = iva.getNombre();
-    let posicion;
-
-    for (let index = 0; index < this.impuestos.length; index++) {
-      if (this.impuestos[index].getNombre() == nombre) {
-        posicion = index;
-        break;
-      }
-    }
-
-    this.impuestos.splice(posicion, 1);
+    this.impuestos.splice(this.impuestos.indexOf(iva), 1)
   }
 
   anadirCategoria (categoria) {
@@ -134,17 +114,7 @@ class Restaurante {
   }
 
   eliminarCategoria (categoria) {
-    let nombre = categoria.getNombre();
-    let posicion;
-
-    for (let index = 0; index < this.categorias.length; index++) {
-      if (this.categorias[index].getNombre() == nombre) {
-        posicion = index;
-        break;
-      }
-    }
-
-    this.categorias.splice(posicion, 1);
+    this.categorias.splice(this.categorias.indexOf(categoria), 1)
   }
 
   anadirHistorico (mesa) {

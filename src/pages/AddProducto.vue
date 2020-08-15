@@ -73,7 +73,7 @@ export default {
     this.mesa = Rest.$restLocal.getMesas()[parseInt(this.id) - 1];
     this.rest = Rest.$restLocal;
 
-    // Creación de un objeto con los productos ordenados por categorías
+    // Creación de un array con los productos ordenados por categorías
     this.rest.categorias.forEach(cat => {
       let catTemp = new Object();
       let prodTemp = [];
