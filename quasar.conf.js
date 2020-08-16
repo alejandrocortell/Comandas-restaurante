@@ -115,8 +115,8 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'comandero',
-        short_name: 'comandero',
+        name: 'Comandas - Restaurante',
+        short_name: 'Comandas - Restaurante',
         description: 'Aplicación para tomar comandas en un restaurante',
         display: 'standalone',
         orientation: 'portrait',

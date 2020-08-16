@@ -7,12 +7,13 @@
       <div
         v-for="(mesa, index) in rest.mesas"
         :key="index"
-        class="col-6 q-pa-xs"
+        class="col-xs-6 col-sm-4 col-md-2 q-pa-xs"
       >
         <q-btn
           color="white"
           text-color="black"
           class="full-width"
+          :class="mesa === null? 'bg-amber-1' : 'bg-green-1 '"
           padding="lg"
           :label="'Mesa ' + (index + 1)"
           :to="{ name: 'mesa', params: {id: (index + 1).toString() } }"
@@ -25,6 +26,7 @@
     >
       <q-btn
         fab
+        class="bg-white"
         icon="settings"
         to="configuracion"
       />
