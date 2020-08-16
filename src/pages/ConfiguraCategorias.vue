@@ -52,17 +52,20 @@
             v-model="categoriaModifica.nombre"
             label="Nombre"
             class="q-mt-md"
+            label-color="accent"
           />
           <q-btn
             class="full-width q-mt-md"
             label="Guardar"
+            color="positive"
+            icon="save"
             @click="guardarCategoria"
           />
           <q-btn
             v-if="categoriaModifica.id != rest.idCategoria"
             class="col full-width q-mt-xs"
             label="Eliminar"
-            color="red"
+            color="negative"
             icon="delete"
             @click="eliminarCategoria"
           />
@@ -72,7 +75,7 @@
 
     <q-footer
       elevated
-      class="bg-grey-8 text-white"
+      class="bg-secondary text-black"
     >
       <q-tabs align="center">
         <q-route-tab

@@ -52,6 +52,7 @@
             label="Cantidad"
             v-model="productoModifica.cantidad"
             mask="#####"
+            label-color="accent"
           />
           <div class="row q-py-sm">
             <q-btn
@@ -69,21 +70,22 @@
             v-model="productoModifica.nota"
             label="Notas"
             class="q-mt-md"
+            label-color="accent"
           />
           <q-separator />
           <q-btn
             class="col full-width q-mt-md"
-            label="Eliminar producto"
-            color="red"
-            icon="delete"
-            @click="eliminaProducto"
+            label="Guardar"
+            color="positive"
+            icon="save"
+            @click="actualizaProducto"
           />
           <q-btn
             class="col full-width q-mt-sm"
-            label="Guardar"
-            color="green"
-            icon="save"
-            @click="actualizaProducto"
+            label="Eliminar producto"
+            color="negative"
+            icon="delete"
+            @click="eliminaProducto"
           />
         </q-card-section>
       </q-card>
@@ -91,12 +93,12 @@
 
     <q-footer
       elevated
-      class="bg-grey-8 text-white"
+      class="bg-secondary text-black"
     >
       <q-tabs align="center">
         <q-route-tab
           to="/"
-          label="Restaurante"
+          icon="home"
         />
         <q-route-tab
           :to="{ name: 'addProducto', params: {id: id } }"

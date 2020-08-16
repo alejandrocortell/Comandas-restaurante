@@ -36,11 +36,13 @@
         <q-input
           label="Nombre restaurante"
           v-model="nombreRestaurante"
+          label-color="accent"
         />
         <q-input
           label="Número de mesas"
           v-model="nMesas"
           mask="####"
+          label-color="accent"
         />
 
         <q-stepper-navigation>
@@ -92,6 +94,7 @@
         <q-input
           v-model="nuevaCategoria"
           label="categoria"
+          label-color="accent"
         >
           <template v-slot:append>
             <q-btn
@@ -156,6 +159,7 @@
             label="Nombre"
             dense
             class="col-8"
+            label-color="accent"
           />
           <q-input
             label="Cantidad"
@@ -164,6 +168,7 @@
             v-model="nuevoIva.cantidad"
             mask="##"
             suffix="%"
+            label-color="accent"
           />
         </div>
         <q-btn
@@ -223,18 +228,21 @@
           dense
           v-model="nuevoProducto.nombre"
           label="Nombre"
+          label-color="accent"
         />
         <q-input
           dense
           v-model="nuevoProducto.precio"
           label="Precio sin impuestos"
           :rules="[ val => !isNaN(val) || 'Introduce un precio válido']"
+          label-color="accent"
         />
         <q-select
           dense
           label="Categoria"
           :options="categorias"
           v-model="nuevoProducto.categoria"
+          label-color="accent"
         />
         <q-select
           dense
@@ -242,6 +250,7 @@
           :options="impuestos"
           option-label="nombre"
           v-model="nuevoProducto.iva"
+          label-color="accent"
         />
         <q-btn
           dense

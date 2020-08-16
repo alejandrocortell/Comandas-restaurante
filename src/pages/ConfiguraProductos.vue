@@ -71,34 +71,40 @@
             v-model="productoModifica.nombre"
             label="Nombre"
             class="q-mt-md"
+            label-color="accent"
           />
           <q-input
             label="Precio"
             v-model="productoModifica.precio"
             :rules="[ val => !isNaN(val) || 'Introduce un precio válido']"
+            label-color="accent"
           />
           <q-select
             label="Categoria"
             :options="optionsCategoria"
             v-model="productoModifica.categoria"
             option-label="nombre"
+            label-color="accent"
           />
           <q-select
             label="Impuesto"
             :options="optionsImpuesto"
             v-model="productoModifica.iva"
             option-label="nombre"
+            label-color="accent"
           />
           <q-btn
             class="full-width q-mt-md"
             label="Guardar"
+            color="positive"
+            icon="save"
             @click="guardarProducto"
           />
           <q-btn
             v-if="productoModifica.id != rest.idProducto"
             class="col full-width q-mt-xs"
             label="Eliminar"
-            color="red"
+            color="negative"
             icon="delete"
             @click="eliminarProducto"
           />
@@ -108,7 +114,7 @@
 
     <q-footer
       elevated
-      class="bg-grey-8 text-white"
+      class="bg-secondary text-black"
     >
       <q-tabs align="center">
         <q-route-tab

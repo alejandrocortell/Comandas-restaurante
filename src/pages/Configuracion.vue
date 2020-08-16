@@ -6,6 +6,7 @@
         label="Nombre restaurante"
         v-model="modificaNombre"
         class="col"
+        label-color="accent"
       />
       <q-btn
         class="col-4 q-mt-md q-ml-md"
@@ -20,6 +21,7 @@
         v-model="nMesas"
         mask="####"
         class="col"
+        label-color="accent"
       />
       <q-btn
         class="col-4 q-mt-md q-ml-md"
@@ -45,7 +47,7 @@
     />
     <q-footer
       elevated
-      class="bg-grey-8 text-white"
+      class="bg-secondary text-black"
     >
       <q-tabs align="center">
         <q-route-tab
@@ -85,6 +87,10 @@ export default {
   methods: {
     modificarNombre () {
       this.rest.nombre = this.modificaNombre;
+      this.$q.notify({
+        type: "positive",
+        message: "Nombre modificado"
+      });
       this.$emit('modifica-restaurante', this.rest)
     },
     modificarMesas () {
@@ -114,10 +120,14 @@ export default {
               this.rest.mesas.splice(i, 1);
             }
           }
+          this.$q.notify({
+            type: "positive",
+            message: "Modificado el número de mesas"
+          });
         } else {
           this.$q.notify({
             type: "negative",
-            message: "No se pueden eliminar mesas sin cerrar"
+            message: "No se pueden eliminar mesas que están sin cerrar"
           });
         }
       }

@@ -54,22 +54,26 @@
             v-model="impuestoModifica.nombre"
             label="Nombre"
             class="q-mt-md"
+            label-color="accent"
           />
           <q-input
             label="Cantidad"
             v-model="impuestoModifica.cantidad"
             mask="##"
+            label-color="accent"
           />
           <q-btn
             class="full-width q-mt-md"
             label="Guardar"
+            color="positive"
+            icon="save"
             @click="guardarImpuesto"
           />
           <q-btn
             v-if="impuestoModifica.id != rest.idImpuesto"
             class="col full-width q-mt-xs"
             label="Eliminar"
-            color="red"
+            color="negative"
             icon="delete"
             @click="eliminarImpuesto"
           />
@@ -79,7 +83,7 @@
 
     <q-footer
       elevated
-      class="bg-grey-8 text-white"
+      class="bg-secondary text-black"
     >
       <q-tabs align="center">
         <q-route-tab
@@ -120,23 +124,26 @@ export default {
       this.impuestoModifica = new Iva(iva.id, iva.nombre, iva.cantidad);
     },
     guardarImpuesto () {
-      // Se modifica un impuesto existente si no tiene el mismo id que el futuro impuesto
-      if (this.rest.idImpuesto != this.impuestoModifica.id) {
-        this.rest.impuestos.forEach(impuesto => {
-          if (impuesto.id === this.impuestoModifica.id) {
-            impuesto.nombre = this.impuestoModifica.nombre;
-            impuesto.cantidad = this.impuestoModifica.cantidad;
-          }
-        });
-      } else {
-        // Si tiene el mismo id, es un impuesto nuevo
-        let impuesto = new Iva(this.impuestoModifica.id, this.impuestoModifica.nombre, this.impuestoModifica.cantidad)
-        this.rest.idImpuesto++;
-        this.rest.impuestos.push(impuesto);
-      }
+      if (this.impuestoModifica.nombre !== '' &&
+        this.impuestoModifica.cantidad !== '') {
+        // Se modifica un impuesto existente si no tiene el mismo id que el futuro impuesto
+        if (this.rest.idImpuesto != this.impuestoModifica.id) {
+          this.rest.impuestos.forEach(impuesto => {
+            if (impuesto.id === this.impuestoModifica.id) {
+              impuesto.nombre = this.impuestoModifica.nombre;
+              impuesto.cantidad = this.impuestoModifica.cantidad;
+            }
+          });
+        } else {
+          // Si tiene el mismo id, es un impuesto nuevo
+          let impuesto = new Iva(this.impuestoModifica.id, this.impuestoModifica.nombre, this.impuestoModifica.cantidad)
+          this.rest.idImpuesto++;
+          this.rest.impuestos.push(impuesto);
+        }
 
-      this.modifica = false;
-      FA.guardarEstadoLocalStorage();
+        this.modifica = false;
+        FA.guardarEstadoLocalStorage();
+      }
     },
     eliminarImpuesto () {
       let productoUsado = false;

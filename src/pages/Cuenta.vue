@@ -55,12 +55,12 @@
 
     <q-footer
       elevated
-      class="bg-grey-8 text-white"
+      class="bg-secondary text-black"
     >
       <q-tabs align="center">
         <q-route-tab
           to="/"
-          label="Restaurante"
+          icon="home"
         />
         <q-route-tab
           :to="{ name: 'mesa', params: { id: id.toString() } }"

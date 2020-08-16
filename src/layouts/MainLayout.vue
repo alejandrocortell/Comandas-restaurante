@@ -3,13 +3,16 @@
 
     <q-header
       elevated
-      class="bg-primary text-white"
+      class="bg-primary"
       height-hint="98"
     >
       <q-toolbar>
         <q-toolbar-title>
           <q-avatar>
-            <img src="https://cdn.quasar.dev/logo/svg/quasar-logo.svg">
+            <q-icon
+              name="local_dining"
+              size="md"
+            ></q-icon>
           </q-avatar>
           {{ titulo }}
         </q-toolbar-title>
