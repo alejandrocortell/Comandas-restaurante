@@ -279,13 +279,13 @@
 </template>
 
 <script>
-import FA from "../class/FuncionesAuxiliares.js";
-import Categoria from "../class/Categoria.js";
-import Mesa from "../class/Mesa.js";
-import Iva from "../class/Iva.js";
-import LineaPedido from "../class/LineaPedido.js";
-import Producto from "../class/Producto.js";
-import Restaurante from "../class/Restaurante.js";
+import FA from '../class/FuncionesAuxiliares.js'
+import Categoria from '../class/Categoria.js'
+import Mesa from '../class/Mesa.js'
+import Iva from '../class/Iva.js'
+import LineaPedido from '../class/LineaPedido.js'
+import Producto from '../class/Producto.js'
+import Restaurante from '../class/Restaurante.js'
 
 export default {
   name: 'ConfiguracionInicial',
@@ -311,15 +311,15 @@ export default {
         categoria: ''
       },
       productos: []
-    };
+    }
   },
   created () {
   },
   methods: {
     anadirCategoria () {
       if (this.nuevaCategoria !== '') {
-        this.categorias.push(this.nuevaCategoria);
-        this.nuevaCategoria = '';
+        this.categorias.push(this.nuevaCategoria)
+        this.nuevaCategoria = ''
       }
     },
     borrarCategoria (cat) {
@@ -327,34 +327,33 @@ export default {
     },
     anadirImpuesto () {
       if (this.nuevoIva.nombre !== '' && this.nuevoIva.cantidad !== '') {
-        let nuevoImpuesto = new Object();
-        nuevoImpuesto.nombre = this.nuevoIva.nombre;
-        nuevoImpuesto.cantidad = parseInt(this.nuevoIva.cantidad);
-        this.impuestos.push(nuevoImpuesto);
+        const nuevoImpuesto = new Object()
+        nuevoImpuesto.nombre = this.nuevoIva.nombre
+        nuevoImpuesto.cantidad = parseInt(this.nuevoIva.cantidad)
+        this.impuestos.push(nuevoImpuesto)
 
-        this.nuevoIva.nombre = '';
-        this.nuevoIva.cantidad = '';
+        this.nuevoIva.nombre = ''
+        this.nuevoIva.cantidad = ''
       }
     },
     borrarImpuesto (iva) {
-      this.impuestos.splice(this.impuestos.indexOf(iva), 1);
+      this.impuestos.splice(this.impuestos.indexOf(iva), 1)
     },
     anadirProducto () {
       if (this.nuevoProducto.nombre !== '' && this.nuevoProducto.precio !== '' &&
         this.nuevoProducto.iva !== '' && this.nuevoProducto.categoria !== '') {
-
         // Para guardar el producto, de momento solo almacenamos el nombre de cat e iva
-        let nuevoProducto = new Object();
-        nuevoProducto.nombre = this.nuevoProducto.nombre;
-        nuevoProducto.precio = parseInt(this.nuevoProducto.precio);
-        nuevoProducto.iva = this.nuevoProducto.iva;
-        nuevoProducto.categoria = this.nuevoProducto.categoria;
-        this.productos.push(nuevoProducto);
+        const nuevoProducto = new Object()
+        nuevoProducto.nombre = this.nuevoProducto.nombre
+        nuevoProducto.precio = parseInt(this.nuevoProducto.precio)
+        nuevoProducto.iva = this.nuevoProducto.iva
+        nuevoProducto.categoria = this.nuevoProducto.categoria
+        this.productos.push(nuevoProducto)
 
-        this.nuevoProducto.nombre = '';
-        this.nuevoProducto.precio = '';
-        this.nuevoProducto.iva = '';
-        this.nuevoProducto.categoria = '';
+        this.nuevoProducto.nombre = ''
+        this.nuevoProducto.precio = ''
+        this.nuevoProducto.iva = ''
+        this.nuevoProducto.categoria = ''
       }
     },
     borrarProducto (prod) {
@@ -362,42 +361,42 @@ export default {
     },
     // Se crea el restuaurante con todos los datos almacenados en data
     finConfiguracion () {
-      Restaurante.$restLocal = new Restaurante(this.nombreRestaurante, parseInt(this.nMesas));
+      Restaurante.$restLocal = new Restaurante(this.nombreRestaurante, parseInt(this.nMesas))
 
       this.categorias.forEach(categoria => {
-        let cat = new Categoria(Restaurante.$restLocal.getIdCategoria(), categoria);
-        Restaurante.$restLocal.anadirCategoria(cat);
-        Restaurante.$restLocal.aumentarIdCategoria();
-      });
+        const cat = new Categoria(Restaurante.$restLocal.getIdCategoria(), categoria)
+        Restaurante.$restLocal.anadirCategoria(cat)
+        Restaurante.$restLocal.aumentarIdCategoria()
+      })
 
       this.impuestos.forEach(impuesto => {
-        let iva = new Iva(Restaurante.$restLocal.getIdImpuesto(), impuesto.nombre, impuesto.cantidad);
-        Restaurante.$restLocal.anadirImpuesto(iva);
-        Restaurante.$restLocal.aumentarIdImpuesto();
-      });
+        const iva = new Iva(Restaurante.$restLocal.getIdImpuesto(), impuesto.nombre, impuesto.cantidad)
+        Restaurante.$restLocal.anadirImpuesto(iva)
+        Restaurante.$restLocal.aumentarIdImpuesto()
+      })
 
       this.productos.forEach(producto => {
-        let categoria;
-        let impuesto;
+        let categoria
+        let impuesto
 
         // Se almacena el objeto Categoria e Iva para introducir ese objeto en el objeto producto
         Restaurante.$restLocal.getCategorias().forEach(cat => {
           if (producto.categoria === cat.nombre) {
-            categoria = cat;
+            categoria = cat
           }
-        });
+        })
 
-        Restaurante.$restLocal.getCategorias().forEach(iva => {
+        Restaurante.$restLocal.getImpuestos().forEach(iva => {
           if (producto.iva.nombre === iva.nombre) {
-            impuesto = iva;
+            impuesto = iva
           }
-        });
+        })
 
-        let prod = new Producto(Restaurante.$restLocal.getIdProducto(), producto.nombre, categoria, producto.precio, impuesto);
-        Restaurante.$restLocal.anadirProducto(prod);
-        Restaurante.$restLocal.aumentarIdProducto();
-      });
-      FA.guardarEstadoLocalStorage();
+        const prod = new Producto(Restaurante.$restLocal.getIdProducto(), producto.nombre, categoria, producto.precio, impuesto)
+        Restaurante.$restLocal.anadirProducto(prod)
+        Restaurante.$restLocal.aumentarIdProducto()
+      })
+      FA.guardarEstadoLocalStorage()
       this.$emit('modifica-restaurante', Restaurante.$restLocal)
       this.$router.push({ name: 'index' })
     }
