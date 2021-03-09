@@ -1,28 +1,18 @@
 <template>
   <q-page class="q-pa-md">
     <h5 class="text-h5 q-my-sm">Configuración inicial</h5>
-    <q-stepper
-      v-model="step"
-      vertical
-      color="primary"
-      animated
-    >
-      <q-step
-        :name="1"
-        title="Primeros pasos"
-        icon="settings"
-        :done="step > 1"
-      >
-        ¡Bienvenido! Vamos a empezar a configurar tu restaurante, más
-        adelante podrás añadir, modificar o eliminar los aspectos que establezcas
-        aquí.
+    <q-stepper v-model="step" vertical color="primary" animated>
+      <q-step :name="1" title="Primeros pasos" icon="settings" :done="step > 1">
+        ¡Bienvenido! Vamos a empezar a configurar tu restaurante, más adelante
+        podrás añadir, modificar o eliminar los aspectos que establezcas aquí.
 
         <q-stepper-navigation>
+          <q-btn @click="step = 2" color="primary" label="Siguiente" />
           <q-btn
-            @click="step = 2"
+            @click="cargarPrueba"
             color="primary"
-            label="Siguiente"
-          />
+            label="Cargar datos de prueba"
+            class="q-ml-sm"/>
         </q-stepper-navigation>
       </q-step>
 
@@ -32,7 +22,10 @@
         icon="create_new_folder"
         :done="step > 2"
       >
-        <p>Introduce el nombre de tu restaurante y el número de mesas que dispones</p>
+        <p>
+          Introduce el nombre de tu restaurante y el número de mesas que
+          dispones
+        </p>
         <q-input
           label="Nombre restaurante"
           v-model="nombreRestaurante"
@@ -46,11 +39,7 @@
         />
 
         <q-stepper-navigation>
-          <q-btn
-            @click="step = 3"
-            color="primary"
-            label="Continuar"
-          />
+          <q-btn @click="step = 3" color="primary" label="Continuar" />
           <q-btn
             flat
             @click="step = 1"
@@ -61,23 +50,14 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step
-        :name="3"
-        title="Categorias"
-        icon="assignment"
-        :done="step > 2"
-      >
-        <p>Introduce las categorías que tendrás en tu restaurante. Es una forma
-          de organizar los productos. Ej. Entrantes, Carnes, Refrescos, Vinos, etc.</p>
-        <q-list
-          dense
-          separator
-          class="q-mt-md"
-        >
-          <q-item
-            v-for="(cat, index) in categorias"
-            :key="index"
-          >
+      <q-step :name="3" title="Categorias" icon="assignment" :done="step > 2">
+        <p>
+          Introduce las categorías que tendrás en tu restaurante. Es una forma
+          de organizar los productos. Ej. Entrantes, Carnes, Refrescos, Vinos,
+          etc.
+        </p>
+        <q-list dense separator class="q-mt-md">
+          <q-item v-for="(cat, index) in categorias" :key="index">
             <q-item-section>{{ cat }}</q-item-section>
             <q-item-section avatar>
               <q-btn
@@ -88,7 +68,6 @@
                 @click="borrarCategoria(cat)"
               />
             </q-item-section>
-
           </q-item>
         </q-list>
         <q-input
@@ -108,11 +87,7 @@
         </q-input>
 
         <q-stepper-navigation>
-          <q-btn
-            @click="step = 4"
-            color="primary"
-            label="Continuar"
-          />
+          <q-btn @click="step = 4" color="primary" label="Continuar" />
           <q-btn
             flat
             @click="step = 2"
@@ -123,24 +98,16 @@
         </q-stepper-navigation>
       </q-step>
 
-      <q-step
-        :name="4"
-        title="Impuestos"
-        icon="add_comment"
-        :done="step > 3"
-      >
-        <p>Añade los tipos de impuestos que luego asiganrás a los productos.
-          Ej. IVA reducido, IVA normal, etc.</p>
-        <q-list
-          dense
-          separator
-          class="q-mt-md"
-        >
-          <q-item
-            v-for="(iva, index) in impuestos"
-            :key="index"
-          >
-            <q-item-section>{{ iva.nombre }} - {{ iva.cantidad }}%</q-item-section>
+      <q-step :name="4" title="Impuestos" icon="add_comment" :done="step > 3">
+        <p>
+          Añade los tipos de impuestos que luego asiganrás a los productos. Ej.
+          IVA reducido, IVA normal, etc.
+        </p>
+        <q-list dense separator class="q-mt-md">
+          <q-item v-for="(iva, index) in impuestos" :key="index">
+            <q-item-section
+              >{{ iva.nombre }} - {{ iva.cantidad }}%</q-item-section
+            >
             <q-item-section avatar>
               <q-btn
                 round
@@ -150,7 +117,6 @@
                 @click="borrarImpuesto(iva)"
               />
             </q-item-section>
-
           </q-item>
         </q-list>
         <div class="row">
@@ -178,11 +144,7 @@
           @click="anadirImpuesto"
         />
         <q-stepper-navigation>
-          <q-btn
-            @click="step = 5"
-            color="primary"
-            label="Continuar"
-          />
+          <q-btn @click="step = 5" color="primary" label="Continuar" />
           <q-btn
             flat
             @click="step = 3"
@@ -199,18 +161,13 @@
         icon="create_new_folder"
         :done="step > 4"
       >
-        <p>Añade los productos disponibles y asignales una categoría y un impuesto
-          de los que has creado previamente. Más adelante podrás seguir introduciendo productos.
+        <p>
+          Añade los productos disponibles y asignales una categoría y un
+          impuesto de los que has creado previamente. Más adelante podrás seguir
+          introduciendo productos.
         </p>
-        <q-list
-          dense
-          separator
-          class="q-mt-md"
-        >
-          <q-item
-            v-for="(prod, index) in productos"
-            :key="index"
-          >
+        <q-list dense separator class="q-mt-md">
+          <q-item v-for="(prod, index) in productos" :key="index">
             <q-item-section>{{ prod.nombre }}</q-item-section>
             <q-item-section>{{ prod.precio }}€</q-item-section>
             <q-item-section avatar>
@@ -234,7 +191,7 @@
           dense
           v-model="nuevoProducto.precio"
           label="Precio sin impuestos"
-          :rules="[ val => !isNaN(val) || 'Introduce un precio válido']"
+          :rules="[val => !isNaN(val) || 'Introduce un precio válido']"
           label-color="accent"
         />
         <q-select
@@ -260,11 +217,7 @@
         />
 
         <q-stepper-navigation>
-          <q-btn
-            @click="finConfiguracion"
-            color="primary"
-            label="Finalizar"
-          />
+          <q-btn @click="finConfiguracion" color="primary" label="Finalizar" />
           <q-btn
             flat
             @click="step = 4"
@@ -281,16 +234,13 @@
 <script>
 import FA from '../class/FuncionesAuxiliares.js'
 import Categoria from '../class/Categoria.js'
-import Mesa from '../class/Mesa.js'
 import Iva from '../class/Iva.js'
-import LineaPedido from '../class/LineaPedido.js'
 import Producto from '../class/Producto.js'
 import Restaurante from '../class/Restaurante.js'
 
 export default {
   name: 'ConfiguracionInicial',
-  props: {
-  },
+  props: {},
   data () {
     return {
       rest: null,
@@ -313,9 +263,14 @@ export default {
       productos: []
     }
   },
-  created () {
-  },
+  created () {},
   methods: {
+    cargarPrueba () {
+      FA.datosPrueba()
+      FA.guardarEstadoLocalStorage()
+      this.$emit('modifica-restaurante', Restaurante.$restLocal)
+      this.$router.push({ name: 'index' })
+    },
     anadirCategoria () {
       if (this.nuevaCategoria !== '') {
         this.categorias.push(this.nuevaCategoria)
@@ -327,7 +282,7 @@ export default {
     },
     anadirImpuesto () {
       if (this.nuevoIva.nombre !== '' && this.nuevoIva.cantidad !== '') {
-        const nuevoImpuesto = new Object()
+        const nuevoImpuesto = {}
         nuevoImpuesto.nombre = this.nuevoIva.nombre
         nuevoImpuesto.cantidad = parseInt(this.nuevoIva.cantidad)
         this.impuestos.push(nuevoImpuesto)
@@ -340,10 +295,14 @@ export default {
       this.impuestos.splice(this.impuestos.indexOf(iva), 1)
     },
     anadirProducto () {
-      if (this.nuevoProducto.nombre !== '' && this.nuevoProducto.precio !== '' &&
-        this.nuevoProducto.iva !== '' && this.nuevoProducto.categoria !== '') {
+      if (
+        this.nuevoProducto.nombre !== '' &&
+        this.nuevoProducto.precio !== '' &&
+        this.nuevoProducto.iva !== '' &&
+        this.nuevoProducto.categoria !== ''
+      ) {
         // Para guardar el producto, de momento solo almacenamos el nombre de cat e iva
-        const nuevoProducto = new Object()
+        const nuevoProducto = {}
         nuevoProducto.nombre = this.nuevoProducto.nombre
         nuevoProducto.precio = parseInt(this.nuevoProducto.precio)
         nuevoProducto.iva = this.nuevoProducto.iva
@@ -361,16 +320,26 @@ export default {
     },
     // Se crea el restuaurante con todos los datos almacenados en data
     finConfiguracion () {
-      Restaurante.$restLocal = new Restaurante(this.nombreRestaurante, parseInt(this.nMesas))
+      Restaurante.$restLocal = new Restaurante(
+        this.nombreRestaurante,
+        parseInt(this.nMesas)
+      )
 
       this.categorias.forEach(categoria => {
-        const cat = new Categoria(Restaurante.$restLocal.getIdCategoria(), categoria)
+        const cat = new Categoria(
+          Restaurante.$restLocal.getIdCategoria(),
+          categoria
+        )
         Restaurante.$restLocal.anadirCategoria(cat)
         Restaurante.$restLocal.aumentarIdCategoria()
       })
 
       this.impuestos.forEach(impuesto => {
-        const iva = new Iva(Restaurante.$restLocal.getIdImpuesto(), impuesto.nombre, impuesto.cantidad)
+        const iva = new Iva(
+          Restaurante.$restLocal.getIdImpuesto(),
+          impuesto.nombre,
+          impuesto.cantidad
+        )
         Restaurante.$restLocal.anadirImpuesto(iva)
         Restaurante.$restLocal.aumentarIdImpuesto()
       })
@@ -392,7 +361,13 @@ export default {
           }
         })
 
-        const prod = new Producto(Restaurante.$restLocal.getIdProducto(), producto.nombre, categoria, producto.precio, impuesto)
+        const prod = new Producto(
+          Restaurante.$restLocal.getIdProducto(),
+          producto.nombre,
+          categoria,
+          producto.precio,
+          impuesto
+        )
         Restaurante.$restLocal.anadirProducto(prod)
         Restaurante.$restLocal.aumentarIdProducto()
       })
